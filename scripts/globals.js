@@ -11,10 +11,15 @@ var editor_layer, inspector_layer;
 
 var images = new Array();
 var imagePaths = {
+	//Icons
 	add: 				"./assets/icons/icon_add_small.png",
 	branch: 			"./assets/icons/icon_branch_small.png",
 	interpretEvent: 	"./assets/icons/icon_interpret_small.png",
-	recordEvent: 		"./assets/icons/icon_event_small.png"
+	recordEvent: 		"./assets/icons/icon_event_small.png",
+	//Images
+	msw: 				"./assets/images/mswFade.png",
+	got: 				"./assets/images/gotFade.png",
+	vods: 				"./assets/images/vodsFade.png"
 };
 
 //Loading array of image objects.
@@ -22,6 +27,10 @@ for (var src in imagePaths) {
     images[src] = new Image();
     images[src].src = imagePaths[src];
 }
+
+//For testing...
+//Detailed in data.js.
+var argumentsFromDatabase, topicsFromDatabase; 
 
 //Global Functions
 //__________________________________
@@ -53,6 +62,16 @@ function bindEvents() {
 	editor.add.on('tap mouseup', function() { //Editor's "add" button implementation.
   		if (editor.toolboxIsOpen) {editor.hideToolbox();}
   		else {editor.showToolbox();}
+  	});
+
+  	editor.argumentGroup.on('dragend', function() {
+  		var i = Math.floor(Math.abs(this.getAbsolutePosition().y / 200));
+  		var topic = editor.arguments[i].topicHandle;
+
+  		if(editor.currTopic != topic) {
+  			editor.changeBgImg(topic);
+  			editor.currTopic = topic;
+  		}
   	});
 
 	//Toolbox events

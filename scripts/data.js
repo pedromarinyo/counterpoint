@@ -1,0 +1,188 @@
+//JSON argument for testing.
+argumentsFromDatabase = {
+	argument1: {
+		"name": 			"Lorem ipsum dolor sit amet",
+		"author": 			"Pedro Silva",
+		"lastModified": 	"3 days ago",
+		"updateFlags": 		"2",
+		"topic": 			"Murder She Wrote",
+		"topicHandle": 		"msw",
+		"question": 		"Mauris sed sem sit amet augue facilisis efficitur?",
+		"answer": 			"Phasellus at dictum nunc, a lacinia neque.",
+		"branches": 	[
+			{
+				"name": 	"Branch 1", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}
+				]
+			}
+		]
+	},
+	
+	argument2: {
+		"name": 			"Phasellus at dictum nunc, a lacinia neque",
+		"author": 			"Pedro Silva",
+		"lastModified": 	"1 day ago",
+		"updateFlags": 		"0",
+		"topic": 			"Murder She Wrote",
+		"topicHandle": 		"msw",
+		"question": 		"Mauris sed sem sit amet augue facilisis efficitur?",
+		"answer": 			"Phasellus at dictum nunc, a lacinia neque.",
+		"branches": 	[
+			{
+				"name": 	"Branch 1", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}
+				]
+			}
+		]
+	},
+
+	argument3: {
+		"name": 			"Lorem ipsum dolor sit amet",
+		"author": 			"Pedro Silva",
+		"lastModified": 	"1 day ago",
+		"updateFlags": 		"0",
+		"topic": 			"Game of Thrones",
+		"topicHandle": 		"got",
+		"question": 		"Mauris sed sem sit amet augue facilisis efficitur?",
+		"answer": 			"Phasellus at dictum nunc, a lacinia neque.",
+		"branches": 	[
+			{
+				"name": 	"Branch 1", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}
+				]
+			}
+		]
+	},
+
+	argument4: {
+		"name": 			"Lorem ipsum dolor sit amet",
+		"author": 			"Pedro Silva",
+		"lastModified": 	"1 day ago",
+		"updateFlags": 		"0",
+		"topic": 			"Game of Thrones",
+		"topicHandle": 		"got",
+		"question": 		"Mauris sed sem sit amet augue facilisis efficitur?",
+		"answer": 			"Phasellus at dictum nunc, a lacinia neque.",
+		"branches": 	[
+			{
+				"name": 	"Branch 1", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}
+				]
+			}
+		]
+	},
+
+	argument5: {
+		"name": 			"Lorem ipsum dolor sit amet",
+		"author": 			"Pedro Silva",
+		"lastModified": 	"1 day ago",
+		"updateFlags": 		"1",
+		"topic": 			"Game of Thrones",
+		"topicHandle": 		"got",
+		"question": 		"Mauris sed sem sit amet augue facilisis efficitur?",
+		"answer": 			"Phasellus at dictum nunc, a lacinia neque.",
+		"branches": 	[
+			{
+				"name": 	"Branch 1", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}
+				]
+			}
+		]
+	},
+
+	argument6: {
+		"name": 			"Lorem ipsum dolor sit amet",
+		"author": 			"Pedro Silva",
+		"lastModified": 	"1 day ago",
+		"updateFlags": 		"0",
+		"topic": 			"Voices of a Distant Star",
+		"topicHandle": 		"vods", 		
+		"question": 		"Mauris sed sem sit amet augue facilisis efficitur?",
+		"answer": 			"Phasellus at dictum nunc, a lacinia neque.",
+		"branches": 	[
+			{
+				"name": 	"Branch 1", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event"
+					}
+				]
+			}
+		]
+	}
+};
+
+topicsFromDatabase = {
+	topic1: 	"Murder She Wrote",
+	topic2: 	"Game of Thrones",
+	topic3: 	"Voices of a Distant Star"
+};
