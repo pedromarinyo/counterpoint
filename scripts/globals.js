@@ -12,7 +12,8 @@ var editor_layer, inspector_layer;
 var images = new Array();
 var imagePaths = {
 	//Icons
-	add: 				"./assets/icons/icon_add_small.png",
+	back: 				"./assets/icons/icons-02.png",
+	add: 				"./assets/icons/icons-01.png",
 	branch: 			"./assets/icons/icon_branch_small.png",
 	interpretEvent: 	"./assets/icons/icon_interpret_small.png",
 	recordEvent: 		"./assets/icons/icon_event_small.png",
@@ -53,6 +54,7 @@ function init() {
 
 	//Begin listening for events.
 	bindEvents();
+	stage.draw();
 
 	return true;
 }
@@ -60,8 +62,7 @@ function init() {
 function bindEvents() {
 	//Editor events
 	editor.add.on('tap mouseup', function() { //Editor's "add" button implementation.
-  		if (editor.toolboxIsOpen) {editor.hideToolbox();}
-  		else {editor.showToolbox();}
+  		if (editor.toolboxIsOpen) {editor.showArgList();}
   	});
 
   	editor.argumentGroup.on('dragend', function() {
@@ -82,7 +83,7 @@ function bindEvents() {
 	  			function() { 
 		  			if(this.getAbsolutePosition().x > 90) {
 		  				editor.expandArgument(editor.arguments[i]);
-		  				//setTimeout(function() {editor.arguments[i].returnAnswerNode(this);}, 500); 
+		  				editor.arguments[i].returnAnswerNode(this);
 		  			}
 		  			else { editor.arguments[i].returnAnswerNode(this); }
 	  			}

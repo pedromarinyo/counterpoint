@@ -8,15 +8,18 @@ function Editor() {
 	this.toolboxIsOpen = false;
 	this.currTopic = "msw";
 
-	this.currArgument = new Kinetic.Group();
+	this.currArgument;
+	this.currArgumentGroup = new Kinetic.Group();
 	this.argumentGroup = new Kinetic.Group(); //Group of argument visual assets.
 	
 	this.add; //Toolbox icons.
 	this.interpretEvent;
 	this.recordEvent;
+	this.backButton;
 	
 	this.openToolbox; //Tweens.
 	this.rotateAdd;
+	this.openBackButton;
 
     //Initialize the editor pane
     this.init = function init() {
@@ -45,11 +48,11 @@ function Editor() {
     	this.add = new Kinetic.Image({ 
 			x: 					50,
 			y: 					50,
-			offsetX: 			50,
-			offsetY: 			50,
+			offsetX: 			40,
+			offsetY: 			40,
  			image:  			images["add"],
- 			width: 				100,
- 			height: 			100
+ 			width: 				80,
+ 			height: 			80
  			//shadowColor: 		'black',
           	//shadowOffset: 		{x: 5,y: 10},
           	//shadowOpacity: 		0.5
@@ -91,7 +94,7 @@ function Editor() {
 	        node: 			this.add, 
 	        duration: 		0.2,
 	        rotation: 		45
-      	});    	
+      	});  
 
     	//Loading arguments for testing.
 		this.loadArguments(argumentsFromDatabase);
@@ -118,8 +121,8 @@ function Editor() {
     
     //Toolbox controls
     this.showToolbox = function showToolbox() {
-        this.toolbox.setZIndex(5);
-        this.add.setZIndex(5);
+        this.toolbox.moveToTop();
+        this.add.moveToTop();
         this.openToolbox.play();
         this.rotateAdd.play();
         this.toolboxIsOpen = true;
@@ -129,7 +132,7 @@ function Editor() {
     this.hideToolbox = function hideToolbox() {
     	this.openToolbox.reverse(); 
     	this.rotateAdd.reverse();
-    	this.add.setZIndex(5);
+    	this.add.moveToTop();
     	this.toolboxIsOpen = false;
     	return true;
     }
@@ -216,39 +219,58 @@ function Editor() {
     }
 
     this.expandArgument = function expandArgument(argument) { 
-    	this.fadeOut(this.argumentGroup);//Fade out collapsed argument list.
-    	this.fadeOut(this.bgImg); //Fade out background image.
-    	setTimeout(function(){editor.argumentGroup.hide();}, 500);
+    	this.fade(this.argumentGroup, "out");//Fade out collapsed argument list.
+    	this.fade(this.bgImg, "out"); //Fade out background image.
+    	//this.argumentGroup.hide();
 
-    	this.currArgument = argument.drawArgumentLarge();
+    	this.currArgument = argument;
+    	this.currArgumentGroup = argument.drawArgumentLarge();
     	var bg = new Kinetic.Rect({
     		x: 				0 - sw,
     		y: 				0 - sh,
     		width: 			sw * 3,
     		height: 		sh * 3
     	});
-    	this.currArgument.add(bg);
-    	bg.setZIndex(1);
+    	this.currArgumentGroup.add(bg);
+    	bg.moveToBottom();
 
-    	editor_layer.add(this.currArgument);
-    	this.currArgument.setZIndex(3);
-    	
+    	editor_layer.add(this.currArgumentGroup);
+    	//this.currArgumentGroup.setZIndex(1);
 
-    	this.currArgument.setAttrs({
+    	this.currArgumentGroup.setAttrs({
     		draggable: 		true
     	});
+
+    	this.showToolbox();
     	
     	return true;
     }
 
-    this.fadeOut = function fadeOut(node) {
+    this.showArgList = function showArgList() {
+    	this.currArgument.reset();
+    	this.currArgumentGroup.destroyChildren();
+    	
+    	this.argumentGroup.show();
+    	this.fade(this.argumentGroup, "in");//Fade in collapsed argument list.
+    	this.fade(this.bgImg, "in"); //Fade in background image.
+
+    	this.hideToolbox();
+    	stage.draw();
+    }
+
+    this.fade = function fade(node, direction) {
+    	var opacity;
+    	if(direction == "out") {opacity = 0;}
+    	else {opacity = 1;}
+
     	var fade = new Kinetic.Tween({
     		node: 		node,
-    		opacity: 	0,
+    		opacity: 	opacity,
     		duration: 	0.3
     	});
+
     	fade.play();
-    }    
+    }   
 }
 
 //Argument Class
@@ -283,10 +305,16 @@ function Argument(argument, y, topicFlag) {
 
 	//Load branches
 	this.loadBranches = function loadBranches() {
+		this.branches = [];
 		for (i = 0; i < this.branchesArg.length; i++) {
 			this.branches.push(new Branch(this.branchesArg[i], this.topicHandle));
 		}
 	}
+
+	//Reset argument
+	 this.reset = function reset() {
+	 	this.currX = 250;
+    }
 	
 	//Create question and answer nodes
 	this.createNode = function createNode(text, type) {
@@ -579,6 +607,7 @@ function Branch(branch, palletName) {
 	
 
 	this.loadNodes = function loadNodes() {
+		this.nodes = [];
 		for (var i = 0; i < this.nodesArg.length; i++) {
 			this.nodes.push(new Node(this.nodesArg[i]));
 		}
