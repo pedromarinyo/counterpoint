@@ -3,14 +3,15 @@
 function Editor() {
 	this.bg; //editor_layer background.
 	this.bgImg; //editor_layer background image.
-	this.argumentGroup; //Group of argument visual assets. 
 	this.arguments = new Array(); //Array of loaded arguments. 
 	this.toolbox; //Toolbox group.
 	this.toolboxIsOpen = false;
 	this.currTopic = "msw";
+
+	this.currArgument = new Kinetic.Group();
+	this.argumentGroup = new Kinetic.Group(); //Group of argument visual assets.
 	
 	this.add; //Toolbox icons.
-	this.branch;
 	this.interpretEvent;
 	this.recordEvent;
 	
@@ -90,16 +91,12 @@ function Editor() {
 	        node: 			this.add, 
 	        duration: 		0.2,
 	        rotation: 		45
-      	});
-
-      	//Creating argument group and adding background.
-    	this.argumentGroup = new Kinetic.Group();
-    	
+      	});    	
 
     	//Loading arguments for testing.
 		this.loadArguments(argumentsFromDatabase);
 		for (i = 0; i < this.arguments.length; i++) {
-			this.argumentGroup.add(this.arguments[i].drawArgument());	
+			this.argumentGroup.add(this.arguments[i].drawArgumentSmall());	
 		}
 		
 		editor_layer.add(this.bg); this.bg.setZIndex(0);
@@ -187,8 +184,6 @@ function Editor() {
     		editor.bgImg.setImage(image);
     		fade.reverse();	
     	}, 500);
-
-    	
     }
 
     //Argument and node management
@@ -210,11 +205,50 @@ function Editor() {
     		else {
     			topicFlag = false;
     		}
-
+    		
     		this.arguments.push(new Argument(argumentsObj[argument], (y * i), topicFlag));
     		i++;
     	}
+
+    	for (i = 0; i < this.arguments.length; i++) {
+    		this.arguments[i].loadBranches();
+    	}
     }
+
+    this.expandArgument = function expandArgument(argument) { 
+    	this.fadeOut(this.argumentGroup);//Fade out collapsed argument list.
+    	this.fadeOut(this.bgImg); //Fade out background image.
+    	setTimeout(function(){editor.argumentGroup.hide();}, 500);
+
+    	this.currArgument = argument.drawArgumentLarge();
+    	var bg = new Kinetic.Rect({
+    		x: 				0 - sw,
+    		y: 				0 - sh,
+    		width: 			sw * 3,
+    		height: 		sh * 3
+    	});
+    	this.currArgument.add(bg);
+    	bg.setZIndex(1);
+
+    	editor_layer.add(this.currArgument);
+    	this.currArgument.setZIndex(3);
+    	
+
+    	this.currArgument.setAttrs({
+    		draggable: 		true
+    	});
+    	
+    	return true;
+    }
+
+    this.fadeOut = function fadeOut(node) {
+    	var fade = new Kinetic.Tween({
+    		node: 		node,
+    		opacity: 	0,
+    		duration: 	0.3
+    	});
+    	fade.play();
+    }    
 }
 
 //Argument Class
@@ -224,25 +258,41 @@ function Argument(argument, y, topicFlag) {
 	this.author 		= argument.author; //Name of the argument's author.
 	this.lastModified 	= argument.lastModified;
 	this.updateFlags	= argument.updateFlags;
+	this.branchesArg 	= argument.branches;
+	this.branches 		= new Array();
 	this.topic 			= argument.topic; //Topic of the argument, i.e. "How to Get Away with Murder", etc.
 	this.topicHandle 	= argument.topicHandle;
 	this.questionText 	= argument.question; //Author's proposed question.
-	this.answerText 	= argument.answer; //Author's proposed solution.
+	this.answerText 	= argument.answer; //Author's proposed solution.	
 	this.y 				= y; //Arguments y coordinate.
 	this.topicFlag 		= topicFlag;
+	this.currX 	 		= 250; //Starting horizontal position; used for drawing nodes on expanded argument.
 
-	this.argumentGroup 	= new Kinetic.Group(); //Stores all visual assets, i.e. question and answer nodes, branches.
+	this.handle 		= new Kinetic.Group(); //Stores all visual assets, i.e. question and answer nodes, branches.
+	this.handleExp 		= new Kinetic.Group(); //Store all visual assets of expanded argument.
 	this.questionNode 	= new Kinetic.Group();
 	this.answerNode 	= new Kinetic.Group();
+	this.qNodeExp 		= new Kinetic.Group();
+	this.aNodeExp 		= new Kinetic.Group();
 	this.label 			= new Kinetic.Group();
 	this.flags 			= new Kinetic.Group();
+	this.track 			= new Kinetic.Group();
 	
 	this.branches; //Array of branch objects. 
+	this.stepY; //Amount to increment y when drawing branches.
 
-	//Create node
+	//Load branches
+	this.loadBranches = function loadBranches() {
+		for (i = 0; i < this.branchesArg.length; i++) {
+			this.branches.push(new Branch(this.branchesArg[i], this.topicHandle));
+		}
+	}
+	
+	//Create question and answer nodes
 	this.createNode = function createNode(text, type) {
-		var radius, x, fontSize, color, colorLibrary, colorPallet;
-		var handle = new Kinetic.Group();
+		var radius, handle, x, fontSize, color, colorLibrary, colorPallet, isDraggable, dragBounds;
+		handle = new Kinetic.Group();
+		dragBounds = null;
 
 		colorLibrary = {
 			"msw": ["#cc9933", "#b18e47"],
@@ -265,20 +315,33 @@ function Argument(argument, y, topicFlag) {
 		switch (type) {
 			case "question":
 				radius = 80; 
-				x = 250; 
+				x = this.currX; 
 				fontSize = 12;
 				color = colorPallet[0]; 
+				break;
+			case "questionExp":
+				radius = 100; 
+				x = this.currX; 
+				fontSize = 12; 
+				color = colorPallet[1];
 				break;
 			case "answer":
 				radius = 80; 
 				x = 350; 
 				fontSize = 12; 
 				color = colorPallet[1];
+				isDraggable = true;
+				dragBounds = function(pos) {
+					if (pos.x < 0) {return {x: this.getAbsolutePosition().x, y: this.getAbsolutePosition().y};}
+					else if (pos.x > 100) {return {x: this.getAbsolutePosition().x, y: this.getAbsolutePosition().y};}
+					else {return {x: pos.x, y: this.getAbsolutePosition().y};}
+				}
 				break;
-			case "event":
-				radius = 60; 
-				x = 100; 
+			case "answerExp":
+				radius = 100; 
+				x = this.currX; 
 				fontSize = 12; 
+				color = colorPallet[1];
 				break;
 		}
 
@@ -291,7 +354,7 @@ function Argument(argument, y, topicFlag) {
 	        strokeWidth: 	0,
 	        shadowColor: 	'black',
 		    shadowOffset: 	{x: 5,y: 10},
-		    shadowOpacity: 	0.2,
+		    shadowOpacity: 	0.2		    
 		});
 
 		var text 			= new Kinetic.Text({
@@ -312,6 +375,12 @@ function Argument(argument, y, topicFlag) {
 		//Adding node to handle group, and returning handle.
 		handle.add(circle); 
 		handle.add(text);
+
+		handle.setAttrs({
+			draggable: 		isDraggable,
+			dragBoundFunc: 	dragBounds
+		});
+
 		return handle;
 	}
 
@@ -358,11 +427,11 @@ function Argument(argument, y, topicFlag) {
 		});
 
 		line = new Kinetic.Line({
-        points: [x, y + 20,x + lineLength, y + 20],
-        stroke: '#999999',
-        strokeWidth: 2,
-        lineCap: 'round'
-      });
+	        points: [x, y + 20,x + lineLength, y + 20],
+	        stroke: '#999999',
+	        strokeWidth: 2,
+	        lineCap: 'round'
+      	});
 
 		handle.add(textName);
 		handle.add(textDate);
@@ -381,7 +450,7 @@ function Argument(argument, y, topicFlag) {
 		y = this.y - 100;
 		x = 400;
 
-		circle 		 	= new Kinetic.Circle({
+		circle 		 		= new Kinetic.Circle({
 			x: 				x,
 	        y: 				y,
 	        radius: 		10,
@@ -404,55 +473,197 @@ function Argument(argument, y, topicFlag) {
 		return handle;
 	}
 
-	//Draw argument
-	this.drawArgument = function drawArgument() {
+	this.createTrack = function createTrack() {
+		var track, handle;
+		handle = new Kinetic.Group();
+
+		track 		 	= new Kinetic.Rect({
+			x: 				300,
+	        y: 				this.y,
+	        offsetY: 		7,
+	        width: 			200,
+	        height: 		15,
+	        cornerRadius: 	7,
+	        fill: 	 		'#aaa',
+	        strokeWidth: 	0,
+	        opacity: 		0.2
+		});
+
+		handle.add(track);
+		return handle;
+	}
+
+	//Draw collapsed argument
+	this.drawArgumentSmall = function drawArgument() {
 		//Draw question and answer nodes.
 		this.questionNode = this.createNode(this.questionText, "question");
 		this.answerNode = this.createNode(this.answerText, "answer");
 		this.label = this.createLabel(this.name, this.lastModified, this.topic, this.topicFlag);
 		this.flags = this.createFlags(this.updateFlags);
-
-		//Initiate branches and nodes.
-		for (i = 0; i < argument.branches.length; i++) { //Iterate through branches.
-			//var newBranch = argument.branches[i];
-			//this.branches.push(new Branch(newBranch.name, newBranch.nodes));
-		}
+		this.track = this.createTrack();
 
 		//Add argument to editor layer.
-		this.argumentGroup.add(this.answerNode);
-		this.argumentGroup.add(this.questionNode); 
-		this.argumentGroup.add(this.label);
-		if(!!this.flags) {this.argumentGroup.add(this.flags); this.flags.setZIndex(3);}
+		this.handle.add(this.answerNode);
+		this.handle.add(this.questionNode); 
+		this.handle.add(this.label);
+		this.handle.add(this.track);
+		if(!!this.flags) {this.handle.add(this.flags); this.flags.setZIndex(3);}
 
 		this.answerNode.setZIndex(1);
 		this.questionNode.setZIndex(2);
 		this.label.setZIndex(2);
+		this.track.setZIndex(0);
+		
+		return this.handle;
+	}
+
+	//Draw expanded argument
+	this.drawArgumentLarge = function drawArgumentLarge(){ //ERROR IN BRANCHES
+		
+		//Initiate branches and nodes.
+		this.stepY = sh / (this.branches.length + 1);
+		this.y = this.stepY;
+		var largestBranchLength = this.branches[0].nodesArg.length;
+		for (var i = 0; i < this.branches.length; i++) { //Iterate through branches.			
+			
+			this.branches[i].loadNodes();
+			var branch = this.branches[i].draw(this.stepY);
+			this.handleExp.add(branch);
+
+			//Check if this is largest branch.
+			if(i != 0) {
+				if(this.branches[i].nodesArg.length > largestBranchLength) {largestBranchLength = this.branches[i].nodesArg.length;}
+			}
+		}
+
 		
 
-		return this.argumentGroup;
+		//Draw question and answer nodes.
+		this.qNodeExp = this.createNode(this.questionText, "questionExp");
+		//Adjusting this.currX; moving answer node to end of branches. 
+		this.currX = 270 + 60 + (140 * (largestBranchLength + 1));
+		this.aNodeExp = this.createNode(this.answerText, "answerExp");
+		
+		this.handleExp.add(this.qNodeExp);
+		this.handleExp.add(this.aNodeExp);
+
+		return this.handleExp;
+	}
+
+	//Return node to origin
+	this.returnAnswerNode = function returnAnswerNode(node){
+		var moveNode = new Kinetic.Tween({
+			node: 			node,
+			x: 				0,
+			duration: 		0.2,
+			easing: 		Kinetic.Easings["EaseOut"]
+		});
+
+		moveNode.play();
 	}
 }
 
 //Branch Class
 //_________________________________
-function Branch(name, nodes) {
-	this.name; //Name of the branch.
-	this.nodes; //Array of node objects.
+function Branch(branch, palletName) {
+	this.name 		= branch.name; //Name of the branch.
+	this.nodesArg 	= branch.nodes; //Array of node objects.
+	this.palletName = palletName;
+	this.nodes 		= new Array();
+
+	this.handle 	= new Kinetic.Group(); //Handle for moving branch's visual assets.
+	this.stepX 		= 140;
+	this.originX 	= (270) + 20; //Padding = 20px.
+	this.line; 
+	this.y;
+	
+
+	this.loadNodes = function loadNodes() {
+		for (var i = 0; i < this.nodesArg.length; i++) {
+			this.nodes.push(new Node(this.nodesArg[i]));
+		}
+	}
+
+	this.draw = function draw(y) {
+		var x = 280 + (this.stepX * (this.nodes.length + 1)); 
+		this.y = y;
+
+		//Drawing branch line.
+		this.line = new Kinetic.Line({
+			points: 		[250, y, x, y],
+	        stroke: 		'#ccc',
+	        strokeWidth: 	4,
+	        lineCap: 		'round'
+		});
+		this.handle.add(this.line);
+		
+		//Drawing nodes.
+		for (i = 0; i < this.nodes.length; i++) {
+			var node = this.nodes[i].draw(this.y, this.originX + (this.stepX * (i+1)), this.palletName); 
+			this.handle.add(node);
+		}
+
+		return this.handle;
+	}
 }
 
 //Node Class
 //_________________________________
-function Node(name, author, description, type) {
-	this.name 			= name; //Name.
-	this.author 		= author; //Name of the node's author.
-	this.description 	= description; //Textual description; displayed in inspector view.
-	this.type			= type; //Node type: event, interpret, evidence, dispute, image, link (online article, etc.), or video. 
+function Node(node) {
+	this.name 			= node.name; //Name.
+	this.author 		= node.author; //Name of the node's author.
+	this.description 	= node.description; //Textual description; displayed in inspector view.
+	this.type			= node.type; //Node type: event, interpret, evidence, dispute, image, link (online article, etc.), or video. 
+	this.evidence 		= node.evidence; //Array of evidence nodes. 
+	this.dispute 		= node.dispute; //Array of dispute nodes. 
 
-	this.group 			= new Kinetic.Group(); //Store group of visible assets, i.e. text, circle, evidence and disputes.
-	this.text; //Node text. 
+	this.handle 		= new Kinetic.Group(); //Store group of visible assets, i.e. text, circle, evidence and disputes.
+	this.color; 
 	this.circle; //Node circle. 
-	this.evidence; //Array of evidence nodes. 
-	this.dispute; //Array of dispute nodes. 
+
+	this.draw = function draw(y, x, palletName) {
+		var colorLibrary, colorPallet;
+
+		colorLibrary = {
+			"msw": ["#cc9933", "#b18e47"],
+			"got": ["#115c81", "#425d77"],
+			"vods": ["#815d24", "#725b35"]
+		};
+
+		
+		colorPallet = colorLibrary[palletName];
+
+
+		var circle 		 	= new Kinetic.Circle({
+			x: 				x,
+	        y: 				y,
+	        radius: 		60,
+	        fill: 			colorPallet[1],
+	        stroke: 		'#cccccc',
+	        strokeWidth: 	2
+		});
+
+		var text 			= new Kinetic.Text({
+	        x: 				x,
+	        y: 				y,
+	        offsetX: 		30,
+	        offsetY: 		30,
+	        text: 			this.name,
+	        fontSize: 		12,
+	        fontFamily: 	'Helvetica',
+	        fill: 			'white',
+	        strokeWidth: 	0,
+	        width: 			60 * 2,
+	        padding: 		5,
+	        align: 			'left'
+		});
+		
+		//Adding node to handle group, and returning handle.
+		this.handle.add(circle); 
+		this.handle.add(text);
+
+		return this.handle;
+	}
 }
 
 //Inspector Class

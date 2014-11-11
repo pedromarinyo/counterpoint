@@ -1,7 +1,7 @@
 //JSON argument for testing.
 argumentsFromDatabase = {
 	argument1: {
-		"name": 			"Lorem ipsum dolor sit amet",
+		"name": 			"Argument 1",
 		"author": 			"Pedro Silva",
 		"lastModified": 	"3 days ago",
 		"updateFlags": 		"2",
@@ -17,21 +17,54 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}, 
 					{
 						"name": 			"Node 2",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					},
+					{
+						"name": 			"Node 3",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}
+				]
+			},
+			{
+				"name": 	"Branch 2", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}			
 				]
 			}
 		]
 	},
 	
 	argument2: {
-		"name": 			"Phasellus at dictum nunc, a lacinia neque",
+		"name": 			"Argument 2",
 		"author": 			"Pedro Silva",
 		"lastModified": 	"1 day ago",
 		"updateFlags": 		"0",
@@ -47,13 +80,17 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}, 
 					{
 						"name": 			"Node 2",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}
 				]
 			}
@@ -61,7 +98,7 @@ argumentsFromDatabase = {
 	},
 
 	argument3: {
-		"name": 			"Lorem ipsum dolor sit amet",
+		"name": 			"Argument 3",
 		"author": 			"Pedro Silva",
 		"lastModified": 	"1 day ago",
 		"updateFlags": 		"0",
@@ -77,13 +114,17 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}, 
 					{
 						"name": 			"Node 2",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}
 				]
 			}
@@ -91,7 +132,7 @@ argumentsFromDatabase = {
 	},
 
 	argument4: {
-		"name": 			"Lorem ipsum dolor sit amet",
+		"name": 			"Argument 4",
 		"author": 			"Pedro Silva",
 		"lastModified": 	"1 day ago",
 		"updateFlags": 		"0",
@@ -107,13 +148,17 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}, 
 					{
 						"name": 			"Node 2",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}
 				]
 			}
@@ -121,7 +166,7 @@ argumentsFromDatabase = {
 	},
 
 	argument5: {
-		"name": 			"Lorem ipsum dolor sit amet",
+		"name": 			"Argument 5",
 		"author": 			"Pedro Silva",
 		"lastModified": 	"1 day ago",
 		"updateFlags": 		"1",
@@ -137,13 +182,17 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}, 
 					{
 						"name": 			"Node 2",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}
 				]
 			}
@@ -151,7 +200,7 @@ argumentsFromDatabase = {
 	},
 
 	argument6: {
-		"name": 			"Lorem ipsum dolor sit amet",
+		"name": 			"Argument 6",
 		"author": 			"Pedro Silva",
 		"lastModified": 	"1 day ago",
 		"updateFlags": 		"0",
@@ -167,13 +216,17 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}, 
 					{
 						"name": 			"Node 2",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event"
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
 					}
 				]
 			}

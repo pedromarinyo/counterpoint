@@ -65,7 +65,7 @@ function bindEvents() {
   	});
 
   	editor.argumentGroup.on('dragend', function() {
-  		var i = Math.floor(Math.abs(this.getAbsolutePosition().y / 200));
+  		var i = Math.floor(Math.abs((this.getAbsolutePosition().y - (sh/3)) / 250));
   		var topic = editor.arguments[i].topicHandle;
 
   		if(editor.currTopic != topic) {
@@ -73,6 +73,22 @@ function bindEvents() {
   			editor.currTopic = topic;
   		}
   	});
+
+  	//Argument events
+  	var answerNodeArray = new Array();
+  	for (i = 0; i < editor.arguments.length; i++) {
+  		(function(i){
+	  		editor.arguments[i].answerNode.on('dragend', 
+	  			function() { 
+		  			if(this.getAbsolutePosition().x > 90) {
+		  				editor.expandArgument(editor.arguments[i]);
+		  				//setTimeout(function() {editor.arguments[i].returnAnswerNode(this);}, 500); 
+		  			}
+		  			else { editor.arguments[i].returnAnswerNode(this); }
+	  			}
+	  		);
+	  	}(i));
+  	}
 
 	//Toolbox events
 	var toolboxItems = [editor.branch, editor.interpretEvent, editor.recordEvent];
