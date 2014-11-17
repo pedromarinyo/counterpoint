@@ -9,6 +9,8 @@ var sh = 768; //Screen height
 var editor, inspector;
 var editor_layer, inspector_layer; 
 
+var bgColor = "#3B3A35"
+
 var images = new Array();
 var imagePaths = {
 	//Icons
@@ -49,8 +51,8 @@ function init() {
 	editor.init();
 
 	//Inspector
-	//inspector = new Inspector();
-	//inspector.init();
+	inspector = new Inspector();
+	inspector.init();
 
 	//Begin listening for events.
 	bindEvents();
@@ -97,6 +99,26 @@ function bindEvents() {
 	  	toolboxItems[i].on('dragend', function() {editor.returnToToolbox(this);});
 	}
   	
+}
+
+function bindNodeEvents(type) {
+	switch (type) {
+		case "editorNodeExp":
+		 	for (i = 0; i < editor.currArgument.branches.length; i++) {
+		 		(function(i){
+			 		for (j = 0; j < editor.currArgument.branches[i].nodes.length; j++) {
+			 			(function(j){
+				 			if (editor.currArgument.branches[i].nodes[j].type == "interpretation") { 
+				 				editor.currArgument.branches[i].nodes[j].handle.on("tap mouseup", function(){
+				 					inspector.show(i, j); 
+				 				});
+				 			}
+			 			}(j));
+			 		}
+		 		}(i));
+		 	}
+			break;
+	}
 }
 
 /*
