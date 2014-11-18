@@ -156,6 +156,72 @@ argumentsFromDatabase = {
 						"dispute": 			[]
 					}, 
 					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"interpretation",
+						"evidence": 		[],
+						"dispute": 			[]
+					},
+					{
+						"name": 			"Node 3",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}
+				]
+			},
+			{
+				"name": 	"Branch 2", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}
+				]
+			},
+			{
+				"name": 	"Branch 3", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
 						"name": 			"Node 2",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
