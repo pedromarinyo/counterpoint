@@ -25,8 +25,14 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event",
-						"evidence": 		[],
+						"type": 			"interpretation",
+						"evidence": 		[{
+							"mediaType": 	"image",
+							"mediaPath": 	"",
+							"description": 	"Test",
+							"nodeType": 	"point",
+							"source": 		"Season 1, Episode 4"
+						}],
 						"dispute": 			[]
 					}, 
 					{
@@ -130,6 +136,51 @@ argumentsFromDatabase = {
 						"dispute": 			[]
 					}
 				]
+			},
+			{
+				"name": 	"Branch 1", 
+				"nodes": [
+					{
+						"name": 			"Node 1",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 2",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 3",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 4",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}, 
+					{
+						"name": 			"Node 5",
+						"author": 			"Pedro Silva",
+						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
+						"type": 			"event",
+						"evidence": 		[],
+						"dispute": 			[]
+					}
+				]
 			}
 		]
 	},
@@ -159,8 +210,28 @@ argumentsFromDatabase = {
 						"name": 			"Node 1",
 						"author": 			"Pedro Silva",
 						"description": 		"Nullam efficitur ipsum quis sapien finibus euismod. Quisque luctus elementum fermentum. Suspendisse tincidunt placerat erat, id consequat turpis ornare ut. Ut ac imperdiet urna, vel rhoncus urna. Etiam id libero in diam varius aliquet nec eu sem. Cras eu urna a nisi consequat bibendum. Quisque ligula mauris, fermentum id dignissim quis, vehicula eu sapien. Morbi eget iaculis urna.",
-						"type": 			"event",
-						"evidence": 		[],
+						"type": 			"interpretation",
+						"evidence": 		[{
+							"mediaType": 	"image",
+							"mediaPath": 	"",
+							"description": 	"Test",
+							"nodeType": 	"point",
+							"source": 		"Season 1, Episode 4"
+						}, 
+						{
+							"mediaType": 	"image",
+							"mediaPath": 	"",
+							"description": 	"Test",
+							"nodeType": 	"point",
+							"source": 		"Season 1, Episode 4"
+						},
+						{
+							"mediaType": 	"image",
+							"mediaPath": 	"",
+							"description": 	"Test",
+							"nodeType": 	"point",
+							"source": 		"Season 1, Episode 4"
+						}],
 						"dispute": 			[]
 					}, 
 					{

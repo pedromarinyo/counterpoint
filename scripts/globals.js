@@ -22,7 +22,16 @@ var imagePaths = {
 	//Images
 	msw: 				"./assets/images/mswFade.png",
 	got: 				"./assets/images/gotFade.png",
-	vods: 				"./assets/images/vodsFade.png"
+	vods: 				"./assets/images/vodsFade.png",
+	//Node Images
+	ring1: 				"./assets/icons/ring1.png",
+	ring2: 				"./assets/icons/ring2.png",
+	ring3: 				"./assets/icons/ring3.png",
+	ring4: 				"./assets/icons/ring4.png",
+	ring5: 				"./assets/icons/ring5.png",
+	ring6: 				"./assets/icons/ring6.png",
+	ring7: 				"./assets/icons/ring7.png",
+	ring8: 				"./assets/icons/ring8.png"
 };
 
 //Loading array of image objects.

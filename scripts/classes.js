@@ -698,11 +698,17 @@ function Node(node) {
 	this.dispute 		= node.dispute; //Array of dispute nodes. 
 
 	this.handle 		= new Kinetic.Group(); //Store group of visible assets, i.e. text, circle, evidence and disputes.
+	this.evidenceHandles = new Kinetic.Group();
 	this.color; 
-	this.circle; //Node circle. 
+	this.circle; //Node circle.
+	this.x;
+	this.y; 
 
 	this.draw = function draw(y, x, palletName) {
 		var colorLibrary, colorPallet, color, strokeWidth, stroke, offset;
+
+		this.y = y;
+		this.x = x;
 
 		colorLibrary = {
 			"msw": ["#5E3448", "#5B404D"],
@@ -721,16 +727,25 @@ function Node(node) {
 			case "interpretation":
 				color = colorPallet[1];
 				strokeWidth = 0;
-				offset = {x: 4, y: 4};
+				offset = {x: 6, y: 6};
 				break;
 		}
 
-		var circle 		 	= new Kinetic.Circle({
+		var circleBg 		 = new Kinetic.Circle({
 			x: 				x,
 	        y: 				y,
 	        radius: 		60,
 	        stroke: 		stroke, 
 	        strokeWidth: 	strokeWidth
+		});
+
+		var circle 			= new Kinetic.Image({
+			x: 				x,
+			y: 				y,
+			width: 			140,
+			height: 		140,
+			offsetX: 		70,
+			offsetY: 		70
 		});
 
 		var text 			= new Kinetic.Text({
@@ -749,27 +764,73 @@ function Node(node) {
 		});
 		
 		//Adding node to handle group, and returning handle.
-		this.handle.add(circle); 
+		this.handle.add(circleBg);
+		//this.handle.add(circle); 
 		this.handle.add(text);
 
 		if(this.type == "event") {
-			circle.setAttrs({
+			circleBg.setAttrs({
 				fillRadialGradientStartPoint: 0,
 	          	fillRadialGradientStartRadius: 0,
 	          	fillRadialGradientEndPoint: 0,
 	          	fillRadialGradientEndRadius: 70,
-	          	fillRadialGradientColorStops: [.7, bgColor, 1, '#222']
+	          	fillRadialGradientColorStops: [.6, bgColor, 1, '#222']
 			});
-		} else {
+
 			circle.setAttrs({
+				image: images["ring6"]
+			});
+
+		} else if (this.type == "interpretation") {
+			circleBg.setAttrs({
 				fill: 			color,
 				shadowColor: 	'#333',
 			    shadowOffset: 	offset,
-			    shadowOpacity: 	0.2
+			    shadowOpacity: 	0.6
 			});
+
+			circle.setAttrs({
+				image: images["ring7"]
+			});
+
+			//Add Points and CounterPoints
+			for (var i = 0; i < this.evidence.length; i++) {
+				// console.log(this.evidence[i]);
+				this.evidenceHandles[i] = this.drawPoint(this.evidence[i], i);
+				this.handle.add(this.evidenceHandles[i]);
+			}
 		}
 
 		return this.handle;
+	}
+
+	this.drawPoint = function drawPoint(node, i) {
+		var handle, circle, color, rotationDeg, offsetY;
+		handle = new Kinetic.Group();
+		rotationDeg = 40 * i; 
+
+		switch (node.nodeType) {
+			case "point":
+				color = "#2b8c5d";
+				offsetY = this.y - 110;
+				break;
+			case "counterPoint":
+				color = "#DC403B";
+				offsetY = this.y + 100; 
+				break;
+		} 
+		circle = new Kinetic.Circle({
+			x: 				this.x,
+	        y: 				this.y,
+	        offsetY: 		offsetY,
+	        offsetx: 		10,
+	        radius: 		20,
+	        fill: 			color,
+	        rotateDeg: 		rotationDeg
+		});
+
+		handle.add(circle); console.log(circle);
+		return handle; 
 	}
 }
 
