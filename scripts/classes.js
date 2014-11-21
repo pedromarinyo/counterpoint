@@ -39,8 +39,9 @@ function Editor() {
 	    this.bgImg = new Kinetic.Image({
 	    	x: 					sw,
 	    	y: 					0,
-	    	offsetX: 			600,
-	    	image: 				images["msw"]
+	    	offsetX: 			650,
+	    	image: 				images["msw"],
+	    	opacity: 			0.6
 	    });
 
     	//Creating toolbox group (i.e. add, branch, interpret and record event). 
@@ -224,6 +225,8 @@ function Editor() {
     	//this.argumentGroup.hide();
 
     	this.currArgument = argument;
+    	this.currArgumentGroup.destroyChildren();
+    	this.currArgumentGroup.draw();
     	this.currArgumentGroup = argument.drawArgumentLarge();
     	var bg = new Kinetic.Rect({
     		x: 				0 - sw,
@@ -246,16 +249,15 @@ function Editor() {
     	return true;
     }
 
-    this.showArgList = function showArgList() {
+    this.showArgList = function showArgList() {    	
     	this.currArgument.reset();
-    	this.currArgumentGroup.destroyChildren();
-    	
+    	this.currArgumentGroup.destroy();    	
     	this.argumentGroup.show();
     	this.fade(this.argumentGroup, "in");//Fade in collapsed argument list.
     	this.fade(this.bgImg, "in"); //Fade in background image.
 
     	this.hideToolbox();
-    	stage.draw();
+    	stage.batchDraw();
     }
 
     this.fade = function fade(node, direction) {
@@ -314,20 +316,21 @@ function Argument(argument, y, topicFlag) {
 
 	//Reset argument
 	 this.reset = function reset() {
-	 	this.currX = 250;
-	 	this.labelExp.destroyChildren();
+	 	this.currX = 250;	
+	 	this.labelExp.destroy(); 	
     }
 	
 	//Create question and answer nodes
 	this.createNode = function createNode(text, type) {
 		var radius, handle, x, fontSize, color, colorLibrary, colorPallet, isDraggable, dragBounds;
 		handle = new Kinetic.Group();
+		handle.destroyChildren();
 		dragBounds = null;
 
 		colorLibrary = {
-			"msw": ["#5E3448", "#5B404D"],
-			"got": ["#115c81", "#425d77"],
-			"vods": ["#FB6648", "#F77B62"]
+			"msw": ["#b2d4dd", "#3f6372"],
+			"got": ["#b2d4dd", "#3f6372"],
+			"vods": ["#b2d4dd", "#3f6372"]
 		};
 
 		switch (this.topic) {
@@ -395,7 +398,7 @@ function Argument(argument, y, topicFlag) {
 	        text: 			text,
 	        fontSize: 		fontSize,
 	        fontFamily: 	'Helvetica',
-	        fill: 			'white',
+	        fill: 			'black',
 	        strokeWidth: 	0,
 	        width: 			radius * 2,
 	        padding: 		15,
@@ -415,39 +418,46 @@ function Argument(argument, y, topicFlag) {
 	}
 
 	this.createLabel = function createLabel(author, date, topic, topicFlag, type) {
-		var textName, textDate, topicName, line, x, y, lineLength;
+		var textName, textDate, fontSize, topicName, line, x, y, lineLength, lineOffset;
 		var handle = new Kinetic.Group();
 
-		y = (type == "reg") ? this.y - 140 : sh - 80;
-		x = (type == "reg") ? 110: 50;
-		if(topicFlag) {lineLength = 700;}
-		else {lineLength = 300;}
-
-		textName = new Kinetic.Text({
+		if (type == "reg") {
+			y = this.y - 140;
+			x = 110;
+			fontSize = 14;
+			lineOffset = 20;
+		} else {
+			y = sh - 80;
+			x = 50;
+			fontSize = 24;
+			lineOffset = 30;
+		}
+		
+		textName = new Kinetic.Text({ //Creating argument's name label.
 	        x: 				x,
 	        y: 				y,
 	        text: 			author,
-	        fontSize: 		14,
+	        fontSize: 		fontSize,
 	        fontFamily: 	'Helvetica',
 	        fill: 			'white',
 	        strokeWidth: 	0,
 	        align: 			'left'
 		});
 
-		topicName = new Kinetic.Text({
+		topicName = new Kinetic.Text({ //Creating topic's label, if needed.
 	        x: 				x + 450,
-	        y: 				y,
+	        y: 				y - 4,
 	        text: 			topic,
-	        fontSize: 		20,
-	        fontFamily: 	'Futura',
+	        fontSize: 		22,
+	        fontFamily: 	'Helvetica',
 	        fill: 			'#eeeeee',
 	        strokeWidth: 	0,
 	        align: 			'left'
 		});
 
-		textDate = new Kinetic.Text({
+		textDate = new Kinetic.Text({ //Creating argument's last modified date.
 	        x: 				x,
-	        y: 				y + 24,
+	        y: 				y + lineOffset + 4,
 	        text: 			date,
 	        fontSize: 		11,
 	        fontFamily: 	'Helvetica',
@@ -456,8 +466,9 @@ function Argument(argument, y, topicFlag) {
 	        align: 			'left'
 		});
 
-		line = new Kinetic.Line({
-	        points: [x, y + 20,x + lineLength, y + 20],
+		lineLength = (topicFlag) ? 700 : 300; //Setting line length.
+		line = new Kinetic.Line({ //Creating line.
+	        points: [x, y + lineOffset,x + lineLength, y + lineOffset],
 	        stroke: '#999999',
 	        strokeWidth: 2,
 	        lineCap: 'round'
@@ -484,7 +495,7 @@ function Argument(argument, y, topicFlag) {
 			x: 				x,
 	        y: 				y,
 	        radius: 		10,
-	        fill: 			"#da3e26",
+	        fill: 			"#ed0b34",
 	        strokeWidth: 	0
 		});
 
@@ -494,7 +505,7 @@ function Argument(argument, y, topicFlag) {
 	        text: 			num,
 	        fontSize: 		10,
 	        fontFamily: 	'Helvetica',
-	        fill: 			'white',
+	        fill: 			'#fafaff',
 	        strokeWidth: 	0
 		});
 
@@ -618,7 +629,7 @@ function Branch(branch, palletName) {
 	this.palletName = palletName;
 	this.nodes 		= new Array();
 
-	this.handle 	= new Kinetic.Group(); //Handle for moving branch's visual assets.
+	this.handle 	 //Handle for moving branch's visual assets.
 	this.stepX 		= 140;
 	this.originX 	= (270) + 20; //Padding = 20px.
 	this.line; this.capLeft; this.capRight; this.title;
@@ -635,6 +646,8 @@ function Branch(branch, palletName) {
 	this.draw = function draw(y, x) {
 		this.y = y;
 		this.x = x; 
+		this.handle = new Kinetic.Group();
+		this.handle.destroyChildren();
 
 		//Drawing branch line.
 		this.line = new Kinetic.Line({
@@ -651,7 +664,7 @@ function Branch(branch, palletName) {
 	        y: 				this.y - 90,
 	        text: 			this.name,
 	        fontSize: 		12,
-	        fontFamily: 	'Futura',
+	        fontFamily: 	'Helvetica',
 	        fill: 			'#eeeeee',
 	        align: 			'left'
 		});
@@ -699,6 +712,7 @@ function Node(node) {
 
 	this.handle 		= new Kinetic.Group(); //Store group of visible assets, i.e. text, circle, evidence and disputes.
 	this.evidenceHandles = new Kinetic.Group();
+	this.disputeHandles = new Kinetic.Group();
 	this.color; 
 	this.circle; //Node circle.
 	this.x;
@@ -711,21 +725,21 @@ function Node(node) {
 		this.x = x;
 
 		colorLibrary = {
-			"msw": ["#5E3448", "#5B404D"],
-			"got": ["#115c81", "#425d77"],
-			"vods": ["#815d24", "#F77B62"]
+			"msw": ["#b2d4dd", "#3f6372"],
+			"got": ["#b2d4dd", "#3f6372"],
+			"vods": ["#b2d4dd", "#3f6372"]
 		};
 
 		colorPallet = colorLibrary[palletName]; 
 
 		switch(this.type) {
 			case "event":
-				color = bgColor;
-				stroke = "#ccc";
-				strokeWidth = 2;
+				color = "#fafaff";
+				
+				strokeWidth = 0;
 				break;
 			case "interpretation":
-				color = colorPallet[1];
+				color = colorPallet[0];
 				strokeWidth = 0;
 				offset = {x: 6, y: 6};
 				break;
@@ -756,7 +770,7 @@ function Node(node) {
 	        text: 			this.name,
 	        fontSize: 		12,
 	        fontFamily: 	'Helvetica',
-	        fill: 			'white',
+	        fill: 			'black',
 	        strokeWidth: 	0,
 	        width: 			60 * 2,
 	        padding: 		5,
@@ -770,11 +784,13 @@ function Node(node) {
 
 		if(this.type == "event") {
 			circleBg.setAttrs({
-				fillRadialGradientStartPoint: 0,
-	          	fillRadialGradientStartRadius: 0,
-	          	fillRadialGradientEndPoint: 0,
-	          	fillRadialGradientEndRadius: 70,
-	          	fillRadialGradientColorStops: [.6, bgColor, 1, '#222']
+				fill: color
+				
+				// fillRadialGradientStartPoint: 0,
+	   //        	fillRadialGradientStartRadius: 0,
+	   //        	fillRadialGradientEndPoint: 0,
+	   //        	fillRadialGradientEndRadius: 70,
+	   //        	fillRadialGradientColorStops: [.6, color, 1, '#222']
 			});
 
 			circle.setAttrs({
@@ -793,11 +809,15 @@ function Node(node) {
 				image: images["ring7"]
 			});
 
-			//Add Points and CounterPoints
+			//Adding points.
 			for (var i = 0; i < this.evidence.length; i++) {
-				// console.log(this.evidence[i]);
 				this.evidenceHandles[i] = this.drawPoint(this.evidence[i], i);
 				this.handle.add(this.evidenceHandles[i]);
+			}
+			//Adding counterPoints.
+			for (var i = 0; i < this.dispute.length; i++) {
+				this.disputeHandles[i] = this.drawPoint(this.dispute[i], i);
+				this.handle.add(this.disputeHandles[i]);
 			}
 		}
 
@@ -805,31 +825,36 @@ function Node(node) {
 	}
 
 	this.drawPoint = function drawPoint(node, i) {
-		var handle, circle, color, rotationDeg, offsetY;
+		var handle, circle, color, rotationDeg, offsetY, circleTween;
 		handle = new Kinetic.Group();
-		rotationDeg = 40 * i; 
+		rotationDeg = 17 * i; 
 
 		switch (node.nodeType) {
 			case "point":
-				color = "#2b8c5d";
-				offsetY = this.y - 110;
+				color = "#60f252";
+				offsetY = 70;
 				break;
 			case "counterPoint":
-				color = "#DC403B";
-				offsetY = this.y + 100; 
+				color = "#ed0b34";
+				offsetY = -70; 
 				break;
 		} 
 		circle = new Kinetic.Circle({
 			x: 				this.x,
 	        y: 				this.y,
 	        offsetY: 		offsetY,
-	        offsetx: 		10,
-	        radius: 		20,
+	        offsetx: 		5,
+	        radius: 		10,
 	        fill: 			color,
-	        rotateDeg: 		rotationDeg
+	        shadowColor: 	'#333',
+		    shadowOffset: 	{x: 5, y: 0},
+		    shadowOpacity: 	0.6
 		});
 
-		handle.add(circle); console.log(circle);
+		circle.rotateDeg(rotationDeg);
+		handle.add(circle);
+
+
 		return handle; 
 	}
 }
@@ -837,14 +862,49 @@ function Node(node) {
 //Inspector Class
 //_________________________________
 function Inspector() {
+	this.bg; this.branchBg;
+	this.currBranch;
+
 	//Initialize the inspector pane
 	this.init = function init() {
 		//Create inspector layer
 		inspector_layer = new Kinetic.Layer();
+
+		//Create inspector background
+		this.bg = new Kinetic.Rect({
+	        x: 					0,
+	        y: 					0,
+	        width: 				sw,
+	        height: 			sh * 2,
+	        fill: 				bgColor
+	    });
+		inspector_layer.add(this.bg); 
+
+		//Create branch display background
+		this.branchBg = new Kinetic.Rect({
+			x: 					sw - 300,
+			y: 					0,
+			width: 				300,
+			height: 			sh,
+			fill: 				"#3f6372",
+			shadowColor: 		'#333',
+		    shadowOffset: 		{x: -6, y: 0},
+		    shadowOpacity: 		0.6
+		});
+		inspector_layer.add(this.branchBg);
 	}
 
 	this.show = function show(i, j) {
 		console.log(editor.currArgument.branches[i].nodes[j].name);
+
+		//Assigning current argument
+		this.currbranch = editor.currArgument.branches[i];
+
+		stage.remove(editor_layer);
+		stage.add(inspector_layer);
+
+		
+
 	}
 }
 

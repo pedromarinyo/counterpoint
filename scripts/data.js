@@ -32,8 +32,28 @@ argumentsFromDatabase = {
 							"description": 	"Test",
 							"nodeType": 	"point",
 							"source": 		"Season 1, Episode 4"
+						},
+						{
+							"mediaType": 	"image",
+							"mediaPath": 	"",
+							"description": 	"Test",
+							"nodeType": 	"point",
+							"source": 		"Season 1, Episode 4"
 						}],
-						"dispute": 			[]
+						"dispute": 			[{
+							"mediaType": 	"image",
+							"mediaPath": 	"",
+							"description": 	"Test",
+							"nodeType": 	"counterPoint",
+							"source": 		"Season 1, Episode 4"
+						},
+						{
+							"mediaType": 	"image",
+							"mediaPath": 	"",
+							"description": 	"Test",
+							"nodeType": 	"counterPoint",
+							"source": 		"Season 1, Episode 4"
+						}]
 					}, 
 					{
 						"name": 			"Node 1",

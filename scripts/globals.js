@@ -9,7 +9,8 @@ var sh = 768; //Screen height
 var editor, inspector;
 var editor_layer, inspector_layer; 
 
-var bgColor = "#3B3A35"
+var bgColor = "#2a3a49";
+
 
 var images = new Array();
 var imagePaths = {
