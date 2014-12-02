@@ -220,10 +220,19 @@ function Editor() {
     }
 
     this.expandArgument = function expandArgument(argument) { 
-    	this.fade(this.argumentGroup, "out");//Fade out collapsed argument list.
-    	this.fade(this.bgImg, "out"); //Fade out background image.
-    	//this.argumentGroup.hide();
+    	if(stage_state == "inspector") {
+    		this.currArgument.reset();
+    		inspector_layer.destroyChildren();
+    		stage.remove(inspector_layer);    		
+    		stage.add(editor_layer);    		
+    	}
+    	else {
+	    	this.fade(this.argumentGroup, "out");//Fade out collapsed argument list.
+	    	this.fade(this.bgImg, "out"); //Fade out background image.
+	    	//this.argumentGroup.hide();
+    	}
 
+    	stage_state = "editorExp";
     	this.currArgument = argument;
     	this.currArgumentGroup.destroyChildren();
     	this.currArgumentGroup.draw();
@@ -249,7 +258,8 @@ function Editor() {
     	return true;
     }
 
-    this.showArgList = function showArgList() {    	
+    this.showArgList = function showArgList() { 
+    	stage_state = "editor";   	
     	this.currArgument.reset();
     	this.currArgumentGroup.destroy();    	
     	this.argumentGroup.show();
@@ -857,18 +867,70 @@ function Node(node) {
 
 		return handle; 
 	}
+
+	this.drawInspector = function drawInspector() {
+		var lineUp, lineDown, node, evidence, dispute; 
+		
+		var handle = new Kinetic.Group();
+
+		lineUp = new Kinetic.Line({
+			points: [sw - 150, sh/2, sw - 150, sh/2 - (160 * this.evidence.length)],
+	        stroke: '#999999',
+	        strokeWidth: 2,
+	        lineCap: 'round'
+		});
+		handle.add(lineUp);
+
+		lineDown = new Kinetic.Line({
+			points: [sw - 150, sh/2, sw - 150, sh/2 + (160 * this.dispute.length)],
+	        stroke: '#999999',
+	        strokeWidth: 2,
+	        lineCap: 'round'
+		});
+		handle.add(lineDown);
+
+		circle = new Kinetic.Circle({
+			x: 				sw - 150,
+	        y: 				sh/2,
+	        offsetY: 		0,
+	        offsetx: 		80,
+	        radius: 		80,
+	        fill: 			"#b2d4dd"	       
+		});		
+		handle.add(circle);
+
+		return handle;
+	}
 }
 
 //Inspector Class
 //_________________________________
 function Inspector() {
-	this.bg; this.branchBg;
+	this.bg; this.branchBg; this.add;
 	this.currBranch;
+
+	this.label; this.description; this.video; this.title;
+
+	this.nodeGroup = new Kinetic.Group();
 
 	//Initialize the inspector pane
 	this.init = function init() {
 		//Create inspector layer
 		inspector_layer = new Kinetic.Layer();
+
+		
+	}
+
+	this.show = function show(i, j) {
+		//console.log(editor.currArgument.branches[i].nodes[j].name);
+		var currNode = editor.currArgument.branches[i].nodes[j]
+		stage_state = "inspector";
+
+		//Assigning current argument
+		this.currbranch = editor.currArgument.branches[i];
+
+		//Removing editor display
+		stage.remove(editor_layer);
 
 		//Create inspector background
 		this.bg = new Kinetic.Rect({
@@ -892,16 +954,58 @@ function Inspector() {
 		    shadowOpacity: 		0.6
 		});
 		inspector_layer.add(this.branchBg);
-	}
 
-	this.show = function show(i, j) {
-		console.log(editor.currArgument.branches[i].nodes[j].name);
+		//Create back button
+		this.add = new Kinetic.Image({ 
+			x: 					50,
+			y: 					50,
+			offsetX: 			40,
+			offsetY: 			40,
+ 			image:  			images["add"],
+ 			width: 				80,
+ 			height: 			80,
+ 			rotationDeg: 		45
+	    }); 
+	    inspector_layer.add(this.add);
+		
+		//Arranging new node
+		this.title 	= new Kinetic.Text({
+	        x: 				80,
+	        y: 				100,	        
+	        text: 			currNode.name,
+	        fontSize: 		22,
+	        fontFamily: 	'Helvetica',
+	        fill: 			'white',
+	        strokeWidth: 	0,
+	        width: 			600,
+	        padding: 		15,
+	        align: 			'left'
+		});
+		inspector_layer.add(this.title);
 
-		//Assigning current argument
-		this.currbranch = editor.currArgument.branches[i];
+		this.description 	= new Kinetic.Text({
+	        x: 				80,
+	        y: 				600,	        
+	        text: 			currNode.description,
+	        fontSize: 		12,
+	        fontFamily: 	'Helvetica',
+	        fill: 			'white',
+	        strokeWidth: 	0,
+	        width: 			600,
+	        padding: 		15,
+	        align: 			'left'
+		});
+		inspector_layer.add(this.description);
+		
+		//Adding media
+		$('#video').html("<video src=''></video>");
 
-		stage.remove(editor_layer);
+		//Adding node evidence and disputes
+		this.nodeGroup.add(currNode.drawInspector());
+		inspector_layer.add(this.nodeGroup);
 		stage.add(inspector_layer);
+
+		bindInspectorEvents();
 
 		
 

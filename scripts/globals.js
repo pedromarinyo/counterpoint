@@ -1,7 +1,7 @@
 //Global Variables
 //_________________________________
 var stage;
-var stage_state = "root";
+var stage_state = "editor";
 
 var sw = 1024; //Screen width
 var sh = 768; //Screen height
@@ -108,6 +108,8 @@ function bindEvents() {
 	for (i = 0; i < toolboxItems.length; i++) {
 	  	toolboxItems[i].on('dragend', function() {editor.returnToToolbox(this);});
 	}
+
+	
   	
 }
 
@@ -129,6 +131,13 @@ function bindNodeEvents(type) {
 		 	}
 			break;
 	}
+}
+
+function bindInspectorEvents() {
+	//Inspector events
+	inspector.add.on('tap mouseup', function() { //Inspector's "back" button implementation.
+  		if (stage_state == "inspector") {editor.expandArgument(editor.currArgument);}
+  	});
 }
 
 /*
